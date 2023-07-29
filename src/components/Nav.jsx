@@ -1,11 +1,12 @@
 import SearchBar from "./SearchBar"
 
-function Nav({onSearch}) {
+function Nav(props) {
+   
+   
    return (
-     
-       <nav>
-        <SearchBar onSearch={onSearch} />
-       </nav>
+        <div>
+        <SearchBar onSearch={props.onSearch} />
+        </div>
        
     ) ;
 }
