@@ -3,11 +3,14 @@ import Cards from './components/Cards.jsx';
 import Nav from './components/Nav';
 import { useState } from 'react';
 import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import About from "./vistas/About"
 import Detail from './vistas/Detail';
-
+import Form from "./components/Form/Form"
 function App() {
+  
+   const location = useLocation();
+
    const [characters,setCharacters] = useState([]);
 
    function onSearch(id) {
@@ -26,8 +29,10 @@ function App() {
 
    return (
       <div className='App'>
-         <Nav onSearch={onSearch} />
+        { location.pathname !== "/" && <Nav onSearch={onSearch} />}
          <Routes>
+
+            <Route path="/" element={<Form/>} />
 
             <Route path="/home" element={<Cards characters={characters} onClose={onClose}/>} /> 
              
