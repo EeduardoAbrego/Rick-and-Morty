@@ -21,7 +21,7 @@ const validate = (userData, proper, errors, setErrors) => {
      } ;
    }
   }
-const Form = () => {
+const Form = ({login}) => {
 
      const [userData, setUserData] = useState({
         email: "" ,
@@ -45,8 +45,15 @@ const Form = () => {
        validate({...userData, [proper]:value },proper, errors, setErrors );
      }
 
+     const handleSubmit = (event) => {
+
+      event.preventDefault();
+      login(userData);
+
+     }
+
     return (
-       <form>
+       <form onSubmit={handleSubmit} >
           <div>
              <label htmlFor="email">Email</label>
              <input type="text" name="email" value={userData.email} onChange={handleChange} />
@@ -60,7 +67,7 @@ const Form = () => {
            </div>
 
           <div>
-             <button> Submit </button>
+             <button type="submit" > Login </button>
            </div>
         </form>
       );
