@@ -17,7 +17,10 @@ function Nav({onSearch, logOut }) {
         <button type="submit" onClick={handlesubm} > Log Out </button>
          <Link to="/about" >
          <p>About</p>
-         </Link>  
+         </Link>
+         <Link to="/favorites"  >
+        <p>❤️</p>
+         </Link>
          <Link to="/home">
          <p>Home</p> 
          </Link>

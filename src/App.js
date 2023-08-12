@@ -7,6 +7,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import About from "./vistas/About"
 import Detail from './vistas/Detail';
 import Form from "./components/Form/Form"
+import Favorites from './components/Favorites';
 function App() {
   
    const location = useLocation();
@@ -62,6 +63,8 @@ function App() {
             <Route path="/about" element={<About/>} />
             
             <Route path="/detail/:id" element={<Detail/>} />
+
+            <Route  path="/favorites"  element={<Favorites/>} />
           
          </Routes>
 
