@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { addFav , removeFav } from "../redux/action"
 import { connect } from "react-redux";
 import { useState , useEffect} from "react";
-
+import style from "./style/Card.module.css"
 
  function Card({id, name, status, species, gender, image, onClose, removeFav, addFav, myFavorites}) {
- 
- const [isFav, setIsFav] = useState(false);
+ console.log(id)
+   const location = useLocation();
 
+   const [isFav, setIsFav] = useState(false);
+ 
  const handleFav = () => {
    if (isFav) {
       setIsFav(false);
@@ -26,22 +28,19 @@ import { useState , useEffect} from "react";
          }
       });
    }, [myFavorites]);
+
+
    return (
-      <div>
-        { isFav ? (
-      <button onClick={handleFav}>❤️</button>
-   ) : (
-      <button onClick={handleFav}>🤍</button>
-   )} 
-         <button onClick={ () => onClose(id)}>X</button>
+      <div className={style.container}>
+         <div className={style.element} >
+        { isFav ? (<button  className={style.boton} onClick={handleFav}>❤️</button> ) : (
+      <button  className={style.boton} onClick={handleFav}>🤍</button> )} 
+         {  location.pathname !== "/favorites"  ? (<button  className={style.boton} onClick={ () => onClose(id)}>❌</button>) : ( <> </>) }
          <Link to={`/detail/${id}`} >
          <h2>{name} </h2>
          </Link>
-         <h2>{status} </h2>
-         <h2>{species} </h2>
-         <h2>{gender} </h2>
-         <h2>{origin.name} </h2>
-         <img src={image} alt='' /> 
+         <img className={style.img} src={image} alt='' /> 
+         </div>
       </div>
    );
 

@@ -1,10 +1,12 @@
 import SearchBar from "./SearchBar"
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
 
-function Nav({onSearch, logOut }) {
+function Nav({onSearch, logOut, onSearch1 }) {
+
+   
 
     const handlesubm = (event) => {
 
@@ -13,18 +15,20 @@ function Nav({onSearch, logOut }) {
        }
 
     return (
-        <div>
-        <button type="submit" onClick={handlesubm} > Log Out </button>
-         <Link to="/about" >
-         <p>About</p>
+        <div  >
+
+         <Link to="/home">
+         <p >Home</p> 
          </Link>
          <Link to="/favorites"  >
-        <p>❤️</p>
+        <p  >❤️</p>
          </Link>
-         <Link to="/home">
-         <p>Home</p> 
+         <Link to="/about" >
+         <p  >About</p>
          </Link>
+          <button  onClick={()=> {onSearch1()}} > All </button>
         <SearchBar onSearch={onSearch} />
+        <button type="submit" onClick={handlesubm}  > Log Out </button>
         </div>
        
     ) ;
