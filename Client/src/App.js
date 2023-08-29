@@ -14,9 +14,10 @@ function App() {
 
    const [characters,setCharacters] = useState([]);
    const [oldChars , setOldChars] = useState([]);
-
+   const [charHr, setCharHr] = useState([]);
+   
    function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
@@ -25,7 +26,7 @@ function App() {
       });
       
    }
-//https://hp-api.onrender.com/api/characters
+//
    function onSearch1 () {
       let n = 1;
       while(n <= 826 ) {
@@ -40,12 +41,29 @@ function App() {
    }
       console.log(oldChars)
    }
+
+   function onSearch2 () {
+      axios( "https://hp-api.onrender.com/api/characters/").then(({ data }) => {
+         if (data) {
+            setCharHr(data);
+         } else {
+            window.alert('¡No hay personajes!');
+         }
+      });
+   }
    
    const  onClose = (id) => {
  setCharacters(characters.filter(char => char.id !== id)) ;
  setOldChars(oldChars.filter(char => char.id !== id)) ;
+ setCharHr(charHr.filter(char => char.id !== id)) ;
 
    };  
+
+   const onCloseAll = () => {
+      setCharacters([]) ;
+ setOldChars([]) ;
+ setCharHr([]) ;
+   }
 
    const navigate = useNavigate();
    const [access, setAccess] = useState(false);
@@ -72,16 +90,16 @@ function App() {
 
    return (
       <div className='App'>
-        { location.pathname !== "/" && <Nav onSearch1={onSearch1}  onSearch={onSearch} logOut={logOut}  />}
+        { location.pathname !== "/" && <Nav onCloseAll={onCloseAll} onSearch2={onSearch2} onSearch1={onSearch1}  onSearch={onSearch} logOut={logOut}  />}
          <Routes>
 
             <Route path="/" element={<Form login={login} />} />
 
-            <Route path="/home" element={<Cards  oldChars={oldChars} characters={characters} onClose={onClose}/>} /> 
+            <Route path="/home" element={<Cards  charHr={charHr} oldChars={oldChars} characters={characters} onClose={onClose}/>} /> 
              
             <Route path="/about" element={<About/>} />
             
-            <Route path="/detail/:id" element={<Detail/>} />
+            <Route path="/detail/:id" element={<Detail setCharHr={setCharHr} charHr={charHr} />} />
 
             <Route  path="/favorites"  element={<Favorites/>} />
           

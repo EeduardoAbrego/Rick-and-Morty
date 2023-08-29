@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 
-function Nav({onSearch, logOut, onSearch1 }) {
+function Nav({onSearch, logOut, onSearch1, onSearch2, onCloseAll}) {
 
    
 
@@ -26,6 +26,8 @@ function Nav({onSearch, logOut, onSearch1 }) {
          <Link to="/about" >
          <p  >About</p>
          </Link>
+         <button onClick={()=> {onCloseAll()}} >Close All </button>
+         <button onClick={()=> {onSearch2()}} >All H-P</button>
           <button  onClick={()=> {onSearch1()}} > All </button>
         <SearchBar onSearch={onSearch} />
         <button type="submit" onClick={handlesubm}  > Log Out </button>

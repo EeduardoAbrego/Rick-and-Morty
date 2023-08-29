@@ -3,19 +3,25 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import style from "./style/datail.module.css"
  
- function Detaill () {
+ function Detaill ({setCharHr, charHr}) {
   const [character, setCharacter] = useState([])
   const  {id} = useParams();
   useEffect(() => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+   console.log(id)
+   if(isNaN(id)) {
+       setCharHr(charHr.filter((char)=> char.id === id ))
+      
+    }
+    else {
+      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
        if (data.name) {
           setCharacter(data);
        } else {
           window.alert('No hay personajes con ese ID');
        }
     });
-    return setCharacter({});
-    }, [id]);
+   }
+   }, [id]);
 
      return (
          <div className={style.container }> 
