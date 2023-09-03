@@ -1,6 +1,6 @@
 const http = require("http");
-const obj = require ("./utils/data")
-
+const getCharById = require("./contollers/getCharById")
+ 
 
 http.createServer((req, res)=>{
  
@@ -10,14 +10,13 @@ http.createServer((req, res)=>{
  res.setHeader('Access-Control-Allow-Origin', '*');
   
   if( url.includes("/rickandmorty/character") ) {
-   const num = url.slice(-1);
-   console.log(num)
-   const id = parseInt(num);
+   const id = Number(url.split("/").pop());
    console.log(id)
-   const character = obj.find( char => char.id === id );
-   console.log(character)
-   res.writeHead(200,{"Content-Type":"aplication/json" });
-   res.end(JSON.stringify(character));
- }
+   getCharById(res, id);
+   } else {
+      res.writeHead(400, { "Content-type": "application/json" });
+      res.end(JSON.stringify({ error: "Route not found" }));
+    }
+ 
 
 }).listen(3001, "localhost")
