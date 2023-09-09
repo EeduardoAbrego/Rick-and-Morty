@@ -9,11 +9,13 @@ import { ADD_FAV , REMOVE_FAV , ORDER, FILTER} from "./action"
  const reducer = (state=initialState,action ) => {
   switch (action.type) {
     case ADD_FAV:
-        return {...state, allCharacters:[...state.allCharacters, action.payload], myFavorites:[...state.allCharacters, action.payload] };
+      return { ...state, myFavorites: action.payload, allCharacters: action.payload };
+       /* return {...state, allCharacters:[...state.allCharacters, action.payload], myFavorites:[...state.allCharacters, action.payload] }; */
         
     case REMOVE_FAV:
-         return {...state, myFavorites: state.myFavorites.filter((char) => char.id !== Number(action.payload)) 
-         };
+      return { ...state, myFavorites: action.payload };
+         /*return {...state, myFavorites: state.myFavorites.filter((char) => char.id !== Number(action.payload)) 
+         }; */
 
     case FILTER:
         const charFilter = [...state.allCharacters].filter((char)=> char.gender === action.payload)    
